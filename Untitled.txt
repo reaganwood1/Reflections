@@ -1,19 +1,128 @@
-How could having easy access to the entire history of a file make you a more efficient programmer in the long term?
+Press cd whereyouwanttogo on mac terminal
+Press cd ~ to go back a directory in mac terminal
 
-You could look back at old revision and see what you could bring forward or what change. It’s like a compare tool. Also, it could be used to look at progress, critique design, etc.
+You can use diff u- oldfile newfile to compare two files and see what changes
+
+Use text editor to open files on mac
+
+What are Versions and Where do They Come From?
+* saving manual copies of your files
+     GoogleDocs can save old versions of a file
+
+Git
+
+- Designed for coding in mind
+- Can use any editor
+- You can use it offline
+- You can decide when to save changes
+- Commits
+    - user created checkpoints - each represents a version of the file
+    - You can provide comments to say what the commit represents
+    - Make one commit per logical change
+
+git log
+     Shows what has changed in a file
+     Log shows all of your commit messages - very useful
+
+- git log —stat ….. gives some statistics about what files have changed in the log, some code can be added and some can be deleted at the same time
+- press q to quit viewing the log
+
+git clone
+
+-  Allows a whole entire repository to be clone from one computer to another computer
+
+git dif first second
+     Shows what has changed in between two files
+     Red lines = removed, Green lines = added
+git checkout
+
+- Resetting all files to how they were when a change was made
+- Useful for going back to code where a bug was or before a bug was so you can see where the bug was introduced
+- Git detached Head mode means that you have checked out an old version and you should be warned of saving things
+
+Repository
+
+- many files connected together to make up a project
+- When you commit, all of the files are saved in their current form
+- All files can be changed in a commit
 
 
+LESSON 2
 
+Typing ls -a at the command line will show all of the files at the command line
+git init creates a new git repository in the specified directory
+‘HEAD’ is what git means by the current commit
 
-1. Why you’re calling
-2. Happy to receive the verbal offer
-3. Formal offer on the way?
-4. If everything checks out with the formal offer, I would be very excited to accept the position.
-5. Is there anything else you need from me?
+git status
+     shows you where you are and what files are present within the git space
 
-9136962123
+Adding changes to a repository
 
-1. Received your call Netsmart gave
-2. Thank you for the offer, I enjoyed interviewing at Netsmart and you seem to be a great place to work at. 
-3. I would love to move forward and receive a more formal offer that I can look over, and then hopefully accept it.
-4. 
+- Staging Area
+    - Commit single files at a time
+    - (Can pick what whiles to add to a commit
+- git add filename
+- git add index.html
+- git status will now show the two files are now added to the staging area
+- git diff with no arguments compares the most recent commit to what’s in the staging area
+- git —staged shows what changes will be added before you commit
+- git diff commit1 commit2 compares the two commits
+- To fix detached head state, all you need to do is use git checkout master to put everything back to the way it was.
+
+Branches
+
+- Each repository has 3 basic branches
+- The highest one is the mast branch
+- git branch
+    - Will show you current branches
+    - Adding something after branch will create a new branch
+    - git checkout branchname will make current branch the branch name
+    - Branches can make it so you can make changes to files without affecting the changes of others, kind of like making different difficult levels on Call of Duty
+    - master branch is the production quality branch you will be releasing
+        - Other branches are for trying and testing things
+        - Make a new branch for each feature that is added
+        - branches all have parents git recognizes
+        - you can make some of your git commits unreachable
+            - For instance checking out a past commit will create a new branch that is detached from the head. Now any changes this to this commit that are committed will be unreachable by the master
+        - git checkout -b new_branch_name
+            - shortcut for git branch new_name combined with git checkout new_branch_name
+        - Combining branches
+            - merging a branch into the master branch
+                - Once done with this, you can delete the label of the non master branch
+                - comparing a commit to its parent git show commit_id
+                - git branch -d name deleted the branch name
+                - to get out of editor when changing branches
+1-press "i"
+2-write your merge message
+3-press "esc"
+4-write ":wq" then press enter
+        - git show compares whatever commit you want with its parent without knowing what the parent actually was.
+- Merge conflict
+    - two different contributors add different implementations of the same function. You want one function though, and got cannot tell which function is correct. Git gives you the option to figure out how to resolve the conflict through throwing a merge conflict. Better than git just accepting what changes it thinks are right without knowing
+    - Merge conflicts happen when two people modify the same line and get doesn’t know which one to take.
+    - git will show you what has changed and let you resolve in within a modified editor window
+    - Once you fix the conflict, you git add the file again. Use git commit to commit the merge
+
+LESSON 3: Using Github to share your commits with others
+
+Github - makes sharing an entire git repository with other people easy
+users can make contributions and send them back to you
+
+- Changes must be staged and committed before you see them on github
+- You get to choose how to sync your repositories
+- You must create a new repository to place things into them
+- Remote - link between git repository and github repository.
+
+Adding a Remote
+
+-     You can use git remote to find out if your repository already has a remote
+- You can also use git remote-v to find out which repository url it is linked to
+- git add remote_name url_to_GitHub_repo
+    - Creates the link to the github repo
+
+git push
+
+-      Takes two arguments
+    - remote you would like to send changes to
+    - name of local branch you would like to push
+    - git push origin master is the call to push the files to the Github repo
